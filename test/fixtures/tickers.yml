@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ask: MyString
+  bid: MyString
+  last: MyString
+  market: MyString
+
+two:
+  ask: MyString
+  bid: MyString
+  last: MyString
+  market: MyString
