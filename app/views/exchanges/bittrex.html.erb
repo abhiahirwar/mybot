@@ -4,41 +4,22 @@
 
 <table cellspacing="20px">
   <tr>
-    <th>Date</th><th>Time</th><th>Ask</th><th>Bid</th><th>Last</th><th>Change</th><th>Gain</th><th>Loss</th>
+    <th>Date</th><th>Time</th><th>Ask</th><th>Bid</th><th>Last</th><th>Change</th><th>%</th><th>Gain</th><th>Loss</th>
   </tr>
 
   <% @data.each_with_index do |entry, i| %>
     <tr>
-      <td><%= entry.created_at.strftime("%d/%m/%y") %></td>
+      <td><%= entry.created_at.strftime("%d") %></td>
       <td><%= entry.created_at.strftime("%H:%M:%S") %></td>
       <td><%= sprintf( "%0.08f", entry.ask ) %></td>
       <td><%= sprintf( "%0.08f", entry.bid ) %></td>
       <td><%= sprintf( "%0.08f", entry.last ) %></td>
       <td class=""><%= sprintf( "%0.08f", entry.change ) %></td>
-      <td class="green"><%= entry.change > 0 ? sprintf( "%0.08f", entry.change ) : '' %></td>
-      <td class="red"><%= entry.change < 0 ? sprintf( "%0.08f", entry.change ) : '' %></td>
+      <td class=""><%= sprintf( "%0.02f", entry.change_percentage ) %></td>
+      <td class=""><%= entry.change > 0 ? sprintf( "%0.08f", entry.change ) : '' %></td>
+      <td class=""><%= entry.change < 0 ? sprintf( "%0.08f", entry.change ) : '' %></td>
       <% unless @rsi[i].nil? %>
         <td class="<%= @rsi[i]  < 35 ? 'green' : ''%>"> <%= sprintf( "%0.02f", @rsi[i]) %></td> 
-      <% else %>
-        <td>-</td>
-      <% end %>
-      <% unless @sma[i].nil? %>
-        <td class=""> <%=  @sma[i] %></td>
-      <% else %>
-        <td>-</td>
-      <% end %>
-      <% unless @ema[i].nil? %>
-        <td class=""> <%=  @ema[i] %></td>
-      <% else %>
-        <td>-</td>
-      <% end %>
-      <% unless @bb[i].nil? %>
-        <td class=""> <%=  @bb[i].inspect %></td>
-      <% else %>
-        <td>-</td>
-      <% end %>
-      <% unless @macd[i].nil? %>
-        <td class=""> <%=  @macd[i].inspect  %></td>
       <% else %>
         <td>-</td>
       <% end %>
